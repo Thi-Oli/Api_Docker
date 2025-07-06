@@ -1,0 +1,21 @@
+# A seção 'services' é onde definimos os contêineres que compõem nossa aplicação.
+services:
+  # 'api' é o nome que damos ao nosso serviço/contêiner da aplicação FastAPI.
+  app:
+    # 'build: .' instrui o Docker Compose a construir uma imagem a partir do
+    # Dockerfile localizado no diretório atual (.).
+    build: .
+    container_name: api
+    # 'ports' mapeia uma porta da sua máquina (host) para uma porta no contêiner.
+    # - "8000:8000" significa que a porta 8000 do seu computador será redirecionada
+    # para a porta 8000 dentro do contêiner, onde a API está rodando.
+    ports:
+      - "8000:8000"
+
+    # 'volumes' sincroniza um diretório da sua máquina com um diretório no contêiner.
+    # - ".:/app" monta o diretório atual do projeto ('.') no diretório '/app' do contêiner.
+    # Isso é essencial para o desenvolvimento, pois permite que as alterações no seu código
+    # local sejam refletidas instantaneamente no contêiner (live reload).
+    # Também garante que o banco de dados SQLite (escola.db) seja salvo na sua máquina.
+    volumes:
+      - .:/app
